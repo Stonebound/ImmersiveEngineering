@@ -63,6 +63,7 @@ import blusunrize.immersiveengineering.common.util.fluids.PotionFluid;
 import blusunrize.immersiveengineering.common.util.loot.IELootFunctions;
 import blusunrize.immersiveengineering.common.wires.IEWireTypes;
 import blusunrize.immersiveengineering.common.world.IEWorldGen;
+import blusunrize.immersiveengineering.common.world.OreRetrogenFeature;
 import blusunrize.immersiveengineering.common.world.Villages;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
@@ -90,6 +91,8 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
@@ -101,6 +104,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -126,6 +130,7 @@ public class IEContent
 
 	public static Fluid fluidPotion;
 
+	public static final Feature<OreFeatureConfig> ORE_RETROGEN = new OreRetrogenFeature(OreFeatureConfig::deserialize);
 
 	public static void modConstruction()
 	{
@@ -573,6 +578,11 @@ public class IEContent
 		//TODO probably not the best place for this, but it works.
 		/*BLUEPRINTS*/
 		IERecipes.initBlueprintRecipes();
+	}
+
+	@SubscribeEvent
+	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
+		event.getRegistry().register(ORE_RETROGEN.setRegistryName(new ResourceLocation(ImmersiveEngineering.MODID, "ore_retro")));
 	}
 
 	private static <T extends IForgeRegistryEntry<T>> void checkNonNullNames(Collection<T> coll)

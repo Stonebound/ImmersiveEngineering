@@ -104,7 +104,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -581,7 +580,8 @@ public class IEContent
 	}
 
 	@SubscribeEvent
-	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
+	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event)
+	{
 		event.getRegistry().register(ORE_RETROGEN.setRegistryName(new ResourceLocation(ImmersiveEngineering.MODID, "ore_retro")));
 	}
 
